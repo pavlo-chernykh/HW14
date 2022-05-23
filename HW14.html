@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+
+    function User(name, surname, byear) {
+      this.name = name;
+      this.surname = surname;
+      this.byear = byear;
+      const currentYear = new Date().getFullYear();
+      this.presence = new Array(10);
+      this.marks = new Array(10);
+      this.markAverage = function() {
+        return this.marks.reduce((partialSum, a) => partialSum + a, 0) / this.marks.length;
+      }; 
+      this.present = function() {
+        for (let i = 0; i < this.presence.length; i++) {
+          if (this.presence.length <= 10 && this.presence[i] === undefined) {
+            this.presence[i] = true;
+            break;
+          }  
+        }
+        
+        return this.presence;
+      };
+      this.absent = function() {
+        for (let i = 0; i < this.presence.length; i++) {
+          if (this.presence.length <= 10 && this.presence[i] === undefined) {
+            this.presence[i] = false;
+            break;
+          }  
+        }
+        return this.presence;
+      };
+      this.mark = function(mark) {
+        for (let i = 0; i < this.marks.length; i++) {
+          if (mark > 10 || typeof mark !== 'number') {
+            throw new TypeError (mark + ' should be a number and should not exceed 10')
+          };
+          if (this.marks.length <= 10 && this.marks[i] === undefined) {
+            this.marks[i] = mark;
+            break;
+          };
+        }
+        return this.marks;
+      }
+      this.summary = function() {
+        const presenceAverage = this.presence.reduce((partialSum, a) => partialSum + a, 0) / this.presence.length;
+
+        if (this.markAverage() >= 9 && presenceAverage >= 0.9) {
+          return 'Ути какой молодчинка!';
+        }
+        if (this.markAverage() < 9 && presenceAverage < 0.9) {
+          return 'Редиска!';
+        }
+        if (this.markAverage() < 9 || presenceAverage < 0.9) {
+          return 'Норм, но можно лучше';
+        }
+      }
+      this.age = function() {
+        return currentYear - this.byear;
+      }
+    };
+
+    const userOleg = new User('Oleg', 'Chernykh', 1992);
+    const userValera = new User('Valera', 'Smork', 1991);
+    const userPavlo = new User('Pavlo', 'Chernykh', 1993)
+
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.present();
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+    userValera.mark(10);
+  
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.absent();
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+    userOleg.mark(10);
+  </script>
+</body>
+</html>
