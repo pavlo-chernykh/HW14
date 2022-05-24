@@ -17,10 +17,13 @@
       const currentYear = new Date().getFullYear();
       this.presence = new Array(10);
       this.marks = new Array(10);
-      this.markAverage = function() {
+    };
+
+    User.prototype.markAverage = function() {
         return this.marks.reduce((partialSum, a) => partialSum + a, 0) / this.marks.length;
-      }; 
-      this.present = function() {
+    };
+
+    User.prototype.present = function() {
         for (let i = 0; i < this.presence.length; i++) {
           if (this.presence.length <= 10 && this.presence[i] === undefined) {
             this.presence[i] = true;
@@ -29,8 +32,9 @@
         }
         
         return this.presence;
-      };
-      this.absent = function() {
+    };
+
+    User.prototype.absent = function() {
         for (let i = 0; i < this.presence.length; i++) {
           if (this.presence.length <= 10 && this.presence[i] === undefined) {
             this.presence[i] = false;
@@ -38,8 +42,9 @@
           }  
         }
         return this.presence;
-      };
-      this.mark = function(mark) {
+    };
+
+    User.prototype.mark = function(mark) {
         for (let i = 0; i < this.marks.length; i++) {
           if (mark > 10 || typeof mark !== 'number') {
             throw new TypeError (mark + ' should be a number and should not exceed 10')
@@ -50,8 +55,9 @@
           };
         }
         return this.marks;
-      }
-      this.summary = function() {
+    };
+
+    User.prototype.summary = function() {
         const presenceAverage = this.presence.reduce((partialSum, a) => partialSum + a, 0) / this.presence.length;
 
         if (this.markAverage() >= 9 && presenceAverage >= 0.9) {
@@ -63,11 +69,12 @@
         if (this.markAverage() < 9 || presenceAverage < 0.9) {
           return 'Норм, но можно лучше';
         }
-      }
-      this.age = function() {
-        return currentYear - this.byear;
-      }
     };
+
+    User.prototype.age = function() {
+      return currentYear - this.byear;
+    };
+
 
     const userOleg = new User('Oleg', 'Chernykh', 1992);
     const userValera = new User('Valera', 'Smork', 1991);
